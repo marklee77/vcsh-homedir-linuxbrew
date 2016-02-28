@@ -1,0 +1,10 @@
+*
+!.config
+!.config/mr
+!.config/mr/config.d
+!.config/mr/config.d/linuxbrew
+!.config/zsh
+!.config/zsh/rc.d
+!.config/zsh/rc.d/linuxbrew
+!.gitignore.d
+!.gitignore.d/linuxbrew
