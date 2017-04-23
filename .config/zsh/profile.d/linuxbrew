@@ -5,13 +5,15 @@ export INFOPATH="${LINUXBREW_HOME}/share/info:$INFOPATH"
 
 function linuxbrew_setup_env {
     args=("${(@s/ /)1}")
-    cmd=$(whence -p ${args[0]})
-    echo $cmd
-    if [[ "$cmd" == ${LINUXBREW_HOME} ]]; then
+    cmd=$(whence -p ${args[1]})
+    if [[ "$cmd" == ${LINUXBREW_HOME}/* ]]; then
       export XDG_DATA_DIRS="${LINUXBREW_HOME}/share:$XDG_DATA_DIRS"
       export LD_LIBRARY_PATH="${LINUXBREW_HOME}/lib:$LD_LIBRARY_PATH"
+    else
+      xdg_data_dirs=("${(@s.:.)XDG_DATA_DIRS}")
+      ld_library_path=("${(@s.:.)XDG_DATA_DIRS}")
     fi
 }
 
 typeset -U preexec_functions
-export preexec_functions=("linuxbrew_setup_env" $preexec_functions)
+preexec_functions=(linuxbrew_setup_env $preexec_functions)
