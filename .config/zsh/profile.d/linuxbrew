@@ -2,5 +2,16 @@ export LINUXBREW_HOME="${HOME}/.linuxbrew"
 export PATH="${LINUXBREW_HOME}/bin:${LINUXBREW_HOME}/sbin:$PATH"
 export MANPATH="${LINUXBREW_HOME}/share/man:$MANPATH"
 export INFOPATH="${LINUXBREW_HOME}/share/info:$INFOPATH"
-export XDG_DATA_DIRS="${LINUXBREW_HOME}/share:$XDG_DATA_DIRS"
-export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
+
+function linuxbrew_setup_env {
+    args=("${(@s/ /)1}")
+    cmd=$(whence -p ${args[0]})
+    echo $cmd
+    if [[ "$cmd" == ${LINUXBREW_HOME} ]]; then
+      export XDG_DATA_DIRS="${LINUXBREW_HOME}/share:$XDG_DATA_DIRS"
+      export LD_LIBRARY_PATH="${LINUXBREW_HOME}/lib:$LD_LIBRARY_PATH"
+    fi
+}
+
+typeset -U preexec_functions
+export preexec_functions=("linuxbrew_setup_env" $preexec_functions)
