@@ -5,5 +5,5 @@ setpush  = vcsh linuxbrew remote set-url --push origin git@stillwell.me:mark/vcs
            vcsh linuxbrew remote set-url --add --push origin git@bitbucket.org:marklee77/vcsh-homedir-linuxbrew.git
 
 [${HOME}/.linuxbrew]
-checkout = git clone https://github.com/linuxbrew/brew.git .linuxbrew
+checkout = git clone https://github.com/Linuxbrew/brew.git .linuxbrew
 skip     = [ "$1" = push ] || [ "$1" = autopush ]
